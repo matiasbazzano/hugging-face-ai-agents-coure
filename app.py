@@ -16,7 +16,6 @@ model_id = "gpt-4o-mini"
 class BasicAgent:
     def __init__(self, model_id=model_id):
         model = OpenAIServerModel(model_id=model_id, temperature=0.1)
-        google_search = GoogleSearchTool()
         self.agent = CodeAgent(
             model=model,
             tools=[
@@ -25,7 +24,7 @@ class BasicAgent:
                 read_code,
                 run_video,
                 search_wikipedia,
-                google_search,
+                GoogleSearchTool(),
             ],
             additional_authorized_imports=["numpy", "pandas"],
             max_steps=20,
@@ -39,8 +38,7 @@ class BasicAgent:
         self.agent.prompt_templates["system_prompt"] += add_sys_prompt
 
     def __call__(self, question: str) -> str:
-        answer = self.agent.run(question)
-        return answer
+        return self.agent.run(question)
 
 
 def run_and_submit_all(profile: gr.OAuthProfile | None):
