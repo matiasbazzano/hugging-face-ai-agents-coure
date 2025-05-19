@@ -5,17 +5,12 @@ import openai
 from openai import OpenAI
 from smolagents import tool
 import os
-
-import io, time, itertools, functools
+import io, functools
 from typing import List, Optional
-import sys, contextlib
-
+import sys
 import av
-from pytube import YouTube
 from yt_dlp import YoutubeDL
-
 from PIL import Image
-from tqdm import tqdm
 import wikipediaapi
 import tempfile
 
